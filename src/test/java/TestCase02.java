@@ -45,7 +45,9 @@ public class TestCase02 {
         WebElement usernameDisplay = driver.findElement(By.xpath("//i[@class='fa fa-user']"));
         Assert.assertTrue(usernameDisplay.isDisplayed());
 
+        driver.navigate().refresh();
         driver.findElement(By.xpath("//i[@class='fa fa-trash-o']")).click();
+        driver.navigate().refresh();
         Thread.sleep(3000);
 
         String actual = driver.findElement(By.xpath("//h2[@data-qa='account-deleted']")).getText();

@@ -96,7 +96,9 @@ public class TestCase01 {
 
         driver.findElement(By.cssSelector("a[data-qa='continue-button']")).click();
         Thread.sleep(5000);
+        driver.navigate().refresh();
         WebElement addCloser = driver.findElement(By.cssSelector("span[class='ns-ys8ts-e-21']"));
+        driver.navigate().refresh();
         addCloser.click();
         Thread.sleep(3000);
 
