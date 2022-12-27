@@ -1,12 +1,14 @@
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.Assert;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.openqa.selenium.AcceptedW3CCapabilityKeys;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 
 import java.time.Duration;
 
@@ -14,7 +16,7 @@ public class TestCase01 {
     static WebDriver driver;
 
     @BeforeClass
-    public static void setUp(){
+    public static void setUp() {
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
         driver.manage().window().maximize();
@@ -23,7 +25,7 @@ public class TestCase01 {
     }
 
     @Test
-    public void test01(){
+    public void test01() {
         Assert.assertTrue(driver.findElement(By.cssSelector("html[lang='en']")).isDisplayed());
     }
 
@@ -39,7 +41,7 @@ public class TestCase01 {
     }
 
     @Test
-    public void test03 () throws InterruptedException {
+    public void test03() throws InterruptedException {
         driver.findElement(By.cssSelector("input[data-qa='signup-name']")).sendKeys("Lawsted");
         driver.findElement(By.cssSelector("input[data-qa='signup-email']")).sendKeys("adiguzelademyusuf@gmail.com");
         Thread.sleep(3000);
@@ -53,7 +55,7 @@ public class TestCase01 {
     }
 
     @Test
-    public void test04 () throws InterruptedException {
+    public void test04() throws InterruptedException {
         driver.findElement(By.cssSelector("input[id='id_gender1']")).click();
         driver.findElement(By.cssSelector("input[data-qa='password']")).sendKeys("ADEMyusuf585.");
 
@@ -94,7 +96,8 @@ public class TestCase01 {
 
         driver.findElement(By.cssSelector("a[data-qa='continue-button']")).click();
         Thread.sleep(5000);
-        driver.findElement(By.cssSelector("span[class='ns-ys8ts-e-21']"));
+        WebElement addCloser = driver.findElement(By.cssSelector("span[class='ns-ys8ts-e-21']"));
+        addCloser.click();
         Thread.sleep(3000);
 
         String actualUsernameLogged = driver.findElement(By.cssSelector("i[class='fa fa-user']")).getText();
@@ -103,10 +106,12 @@ public class TestCase01 {
         Assert.assertTrue(actualUsernameLogged.contains(expectedUsernameLogged));
         Thread.sleep(3000);
 
+
     }
 
     @Test
-    public void test06(){
+    @Ignore
+    public void test06() {
         driver.findElement(By.cssSelector("i[class='fa fa-trash-o']")).click();
 
 
@@ -116,17 +121,6 @@ public class TestCase01 {
         Assert.assertTrue(actualText.contains(expectedText));
 
     }
-
-
-
-
-
-
-
-
-
-
-
 
 
 }
