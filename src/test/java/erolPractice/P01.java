@@ -1,13 +1,10 @@
-package practice;
+package erolPractice;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
-import io.netty.buffer.AbstractByteBufAllocator;
 import org.junit.Assert;
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.time.Duration;
