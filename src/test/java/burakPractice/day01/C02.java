@@ -1,12 +1,8 @@
-package burakPractice;
+package burakPractice.day01;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.*;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -15,7 +11,7 @@ import org.openqa.selenium.support.ui.Select;
 import java.time.Duration;
 import java.util.List;
 
-public class C01 {
+public class C02 {
 
     static WebDriver driver;
 
@@ -30,24 +26,25 @@ public class C01 {
     public void tearDown() {
         driver.quit();
     }
-    // https://www.amazon.com/ sayfasina gidin
     @Test
-    public void test1(){
+    public void test1() {
+        // https://www.amazon.com/ sayfasina gidin
         driver.get("https://www.amazon.com/");
 
-        // dropdown'dan "Books" secenegini secin
+        // dropdown'dan "Baby" secenegini secin
         WebElement dropdown = driver.findElement(By.xpath("//select[@aria-describedby='searchDropdownDescription']"));
         Select option = new Select(dropdown);
-        option.selectByVisibleText("Books");
+        option.selectByVisibleText("Baby");
 
-        // arama cubuguna "Java" aratın
-        driver.findElement(By.id("twotabsearchtextbox")).sendKeys("Java", Keys.ENTER);
+        // sectiginiz option'i yazdirin
+        String selectedOption = option.getFirstSelectedOption().getText();
+        System.out.println(selectedOption);
 
-        // arama sonuclarinin Java icerdigini test edin
-        WebElement aramaSonuc = driver.findElement(By.xpath("//div[@class='a-section a-spacing-small a-spacing-top-small']"));
-        String aramasonucyazisi = aramaSonuc.getText();
-        String expected = "Java";
+        // dropdown'daki optionlarin toplam sayısının 28'e esit oldugunu test edin
+        List<WebElement> list = option.getOptions();
+        long actual = list.size();
+        long expected = 28;
 
-        Assert.assertTrue(aramasonucyazisi.contains(expected));
+        Assert.assertEquals(expected, actual);
     }
 }
