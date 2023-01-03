@@ -1,5 +1,8 @@
 package homeWork;
 
+import org.junit.Assert;
+import org.junit.Test;
+import org.openqa.selenium.By;
 import utilities.TestBase;
 
 public class Day08 extends TestBase {
@@ -20,5 +23,27 @@ public class Day08 extends TestBase {
     //Gönderdiğiniz metnin isminizi içerdiğini doğrulayın
     //finally print on console this mesaaje "Hello TechproEducation How are you today"
 
+    @Test
+    public void test1() {
+        driver.get("http://demo.automationtesting.in/Alerts.html");
 
+        driver.findElement(By.xpath("//button[@class='btn btn-danger']")).click();
+        String alertMessage1 = driver.switchTo().alert().getText();
+        System.out.println(alertMessage1);
+        driver.switchTo().alert().accept();
+
+        driver.findElement(By.xpath("//a[@href='#CancelTab']")).click();
+        driver.findElement(By.xpath("//button[@class='btn btn-primary']")).click();
+        String alertMessage2 = driver.switchTo().alert().getText();
+        System.out.println(alertMessage2);
+        driver.switchTo().alert().dismiss();
+
+        driver.findElement(By.xpath("//a[@href='#Textbox']")).click();
+        driver.findElement(By.xpath("//button[@class='btn btn-info']")).click();
+        driver.switchTo().alert().sendKeys("Adem Yusuf Adiguzel");
+        driver.switchTo().alert().accept();
+        String message = driver.findElement(By.xpath("//p[@id='demo1']")).getText();
+        Assert.assertTrue(message.contains("Adem Yusuf Adiguzel"));
+        System.out.println(message);
+    }
 }
