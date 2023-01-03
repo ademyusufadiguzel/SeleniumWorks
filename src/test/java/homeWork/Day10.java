@@ -4,6 +4,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import utilities.TestBase;
 
 import java.util.Set;
@@ -38,8 +39,8 @@ public class Day10 extends TestBase {
 
         Set<String> allWindows = driver.getWindowHandles();
 
-        for (String w : allWindows){
-            if (!w.contains(window1)){
+        for (String w : allWindows) {
+            if (!w.contains(window1)) {
                 driver.switchTo().window(w);
                 break;
             }
