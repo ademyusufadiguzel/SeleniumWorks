@@ -18,25 +18,19 @@ public class C03 extends TestBase {
 
     @Test
     public void test1() throws InterruptedException {
+
         driver.get("http://demo.guru99.com/test/guru99home/");
+        List<WebElement> allIframe = driver.findElements(By.tagName("iframe"));
+        System.out.println(allIframe.size());
 
-        List<WebElement> iframeSayisi = driver.findElements(By.xpath("//iframe"));
-        System.out.println(iframeSayisi.size());
-
-        WebElement iframe1 = driver.findElement(By.xpath("//*[@wmode='transparent']"));
-        driver.switchTo().frame(iframe1);
+        WebElement iframe = driver.findElement(By.xpath("//iframe[@wmode='transparent']"));
+        driver.switchTo().frame(iframe);
+        driver.findElement(By.id("player")).click();
         Thread.sleep(3000);
-        driver.findElement(By.cssSelector("button[aria-label='Oynat']")).click();
 
         driver.switchTo().defaultContent();
-        driver.navigate().refresh();
-        Thread.sleep(3000);
-
         WebElement iframe2 = driver.findElement(By.id("a077aa5e"));
-        driver.switchTo().frame(iframe2).findElement(By.xpath("//img[@src='Jmeter720.png']")).click();
-
-
-
+        driver.switchTo().frame(iframe2);
+        driver.findElement(By.xpath("//img[@src='Jmeter720.png']")).click();
     }
-
 }

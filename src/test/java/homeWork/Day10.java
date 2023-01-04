@@ -19,39 +19,30 @@ public class Day10 extends TestBase {
     //Açılan yeni Tab da ""This is a sample page"" yazısının görünür olduğunu doğrula
     //İlk Tab'a geri dön
     //New Tab butonunun görünür olduğunu doğrula
-    @Test
-    public void test1() throws InterruptedException {
-        driver.get("https://demoqa.com/");
-        String window1 = driver.getWindowHandle();
 
-        driver.findElement(By.xpath("(//div[@class='card mt-4 top-card'])[3]")).click();
 
-        String text1 = driver.findElement(By.xpath("//div[@class='col-12 mt-4 col-md-6']")).getText();
-        Assert.assertEquals("Passed", "Please select an item from left to start practice.", text1);
-        Thread.sleep(3000);
-
-        driver.findElement(By.xpath("(//li[@id='item-0'])[3]")).click();
-
-        WebElement newTabButton = driver.findElement(By.id("tabButton"));
-        Assert.assertTrue(newTabButton.isDisplayed());
-
-        newTabButton.click();
-
-        Set<String> allWindows = driver.getWindowHandles();
-
-        for (String w : allWindows) {
-            if (!w.contains(window1)) {
-                driver.switchTo().window(w);
-                break;
-            }
-        }
-
-        String window2Text = driver.findElement(By.id("sampleHeading")).getText();
-        Assert.assertEquals("Passed", "This is a sample page", window2Text);
-
-        driver.switchTo().window(window1);
-        Assert.assertTrue(newTabButton.isDisplayed());
-    }
+//
+//    @Test
+//    public void test1() throws InterruptedException {
+//
+//        driver.get("https://demoqa.com/");
+//
+//        driver.navigate().refresh();
+//        WebElement alertPage = driver.findElement(By.xpath("//h5[.='Alerts, Frame & Windows']"));
+//        driver.navigate().refresh();
+//        alertPage.click();
+//
+//        String text1 = driver.findElement(By.xpath("//div[@class='col-12 mt-4 col-md-6']")).getText();
+//        Assert.assertEquals("Please select an item from left to start practice.", text1);
+//
+//
+//
+//
+//          POP-UP / COOKIE SORUNU DAHA SONRA COZ!!!
+//
+//
+//
+//    }
 }
 
 

@@ -9,22 +9,30 @@ import java.security.Key;
 
 public class TestCase05 extends TestBase {
 
+    //1. Launch browser
+    //2. Navigate to url 'http://automationexercise.com'
+    //3. Verify that home page is visible successfully
+    //4. Click on 'Signup / Login' button
+    //5. Verify 'New User Signup!' is visible
+    //6. Enter name and already registered email address
+    //7. Click 'Signup' button
+    //8. Verify error 'Email Address already exist!' is visible
+
     @Test
     public void test1(){
         driver.get("http://automationexercise.com");
+        WebElement pageVisible = driver.findElement(By.xpath("//*"));
+        Assert.assertTrue(pageVisible.isDisplayed());
 
-        WebElement homePage = driver.findElement(By.xpath("//*"));
-        Assert.assertTrue(homePage.isDisplayed());
+        driver.findElement(By.xpath("//a[@href='/login']")).click();
 
-        String singUP = driver.findElement(By.xpath("(//h2)[3]")).getText();
-        String singUPexpected = "New User Signup!";
-        Assert.assertEquals(singUPexpected, singUP);
+        String newUserText = driver.findElement(By.xpath("//div[@class='signup-form']//h2")).getText();
+        Assert.assertEquals("New User Signup!", newUserText);
 
         driver.findElement(By.xpath("//input[@data-qa='signup-name']")).sendKeys("Lawsted", Keys.TAB, "adiguzelademyusuf@gmail.com", Keys.TAB, Keys.ENTER);
 
-        String errorText = driver.findElement(By.xpath("(//p)[1]")).getText();
-        Assert.assertEquals("Email Address already exist!", errorText);
-
+        String existText = driver.findElement(By.xpath("//form[@action='/signup']//p")).getText();
+        Assert.assertEquals("Email Address already exist!", existText);
 
     }
 
