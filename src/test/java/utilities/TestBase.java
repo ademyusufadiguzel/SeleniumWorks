@@ -27,7 +27,7 @@ public abstract class TestBase {
     //    tearDown
     @After
     public void tearDown() {
-        driver.quit();
+//        driver.quit();
     }
 
     //    MULTIPLE WINDOW:
@@ -46,4 +46,13 @@ public abstract class TestBase {
         }
         driver.switchTo().window(origin);
     }
+
+    public void waitFor(int seconds){
+        try {
+            Thread.sleep(seconds*1000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 }
