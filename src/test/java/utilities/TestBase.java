@@ -7,6 +7,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.time.Duration;
+import java.util.ArrayList;
+import java.util.List;
+
 public abstract class TestBase {
     //    TestBase i abstract yapmamizin sebebi bu sinifin objesini olusturmak istemiyorum
 //    TestBase testBase = new TestBase(); -> YAPILAMAZ
@@ -45,6 +48,14 @@ public abstract class TestBase {
             }
         }
         driver.switchTo().window(origin);
+    }
+
+    //    windowNumber sıfır (0)'dan başlıyor.
+    //    index numarasini parametre olarak alir
+    //    ve o indexli pencerece gecis yapar
+    public static void switchToWindow(int windowNumber){
+        List<String> list = new ArrayList<>(driver.getWindowHandles());
+        driver.switchTo().window(list.get(windowNumber-1));
     }
 
     public void waitFor(int seconds){
