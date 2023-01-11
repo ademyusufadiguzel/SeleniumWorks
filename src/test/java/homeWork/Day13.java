@@ -3,6 +3,8 @@ package homeWork;
 import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import utilities.TestBase;
 
 public class Day13 extends TestBase {
@@ -34,8 +36,31 @@ public class Day13 extends TestBase {
 
         Assert.assertEquals("https://www.sahibinden.com/arama/detayli",driver.getCurrentUrl());
 
+        driver.findElement(By.xpath("//span[.='Emlak']")).click();
+        waitFor(1);
+        driver.findElement(By.xpath("//span[.='Konut']")).click();
+        waitFor(1);
+        driver.findElement(By.xpath("//span[.='Satılık']")).click();
+        waitFor(1);
 
+        adressFilter("Manisa", "Yunusemre","Kaynak Mh.");
 
+        waitFor(5);
+    }
+
+    public void adressFilter(String il, String ilce, String semt){
+        WebElement ilSelect = driver.findElement(By.xpath("//li[@data-address='city']//a[@class='faceted-select']"));
+        WebElement ilceSelect = driver.findElement(By.xpath("//li[@data-address='town']//a[@class='faceted-select']"));
+        WebElement semtSelect = driver.findElement(By.xpath("//li[@data-address='quarter']//a[@class='faceted-select']"));
+        WebElement closePanel = driver.findElement(By.xpath("//a[@class='collapse-pane']"));
+
+        Actions actions = new Actions(driver);
+        actions.click(ilSelect).sendKeys(il).click(closePanel).build().perform();
+        waitFor(1);
+        actions.click(ilceSelect).sendKeys(ilce).click(closePanel).build().perform();
+        waitFor(1);
+        actions.click(semtSelect).sendKeys(semt).click(closePanel).build().perform();
+        waitFor(1);
 
 
     }
