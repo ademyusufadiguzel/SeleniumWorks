@@ -15,20 +15,14 @@ public class Day15 extends TestBase {
     //Tüm E-maillerin "@" işareti içerdiğini doğrulayin
 
     @Test
-    public void test(){
+    public void test() {
         driver.get("https://www.way2automation.com/angularjs-protractor/webtables/");
 
         List<WebElement> elements = driver.findElements(By.xpath("//table[@class='smart-table table table-striped']//tbody//tr//td[7]"));
         elements.forEach(t -> System.out.println(t.getText()));
 
-        for (WebElement w : elements){
+        for (WebElement w : elements) {
             Assert.assertTrue(w.getText().contains("@"));
         }
     }
-
-//    public static String elementsToTextString(List<WebElement> elements) {
-//         return elements.forEach(t -> System.out.println(t.getText()));
-//
-//    }
-
 }
