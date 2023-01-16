@@ -7,13 +7,12 @@ public class FakerDeneme{
     @Test
     public void test1(){
     Faker faker = new Faker();
-        System.out.println(faker.business().creditCardNumber());
-        System.out.println(faker.business().creditCardNumber());
-        System.out.println(faker.business().creditCardNumber());
-        System.out.println(faker.business().creditCardNumber());
-        System.out.println(faker.business().creditCardNumber());
-        System.out.println(faker.business().creditCardNumber());
-        System.out.println(faker.business().creditCardNumber());
+
+        for (int i = 0; i < 100; i++) {
+            System.out.println(faker.number().numberBetween(1,3));
+        }
+
+
     }
 
 }
