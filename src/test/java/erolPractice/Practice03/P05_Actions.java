@@ -15,24 +15,85 @@ public class P05_Actions extends TestBase {
     - Son olarak sayfayı temizleyiniz
     */
 
+//    @Test
+//    public void name() throws InterruptedException {
+//        driver.get("http://szimek.github.io/signature_pad/");
+//        WebElement yaziTahtasi = driver.findElement(By.xpath("//canvas"));
+//        Actions actions = new Actions(driver);
+//        actions.moveToElement(yaziTahtasi).clickAndHold();
+//        for (int i = 0; i < 10; i++) {
+//            actions.moveByOffset(-5,-5);
+//        }
+//        for (int i = 0; i < 10; i++) {
+//            actions.moveByOffset(0,5);
+//        }
+//        for (int i = 0; i < 10; i++) {
+//            actions.moveByOffset(5,0);
+//        }
+//        actions.release().build().perform();
+//        Thread.sleep(5000);
+//        driver.findElement(By.xpath("//*[text()='Clear']")).click();
+//    }
+
     @Test
-    public void name() throws InterruptedException {
+    public void test1(){
         driver.get("http://szimek.github.io/signature_pad/");
-        WebElement yaziTahtasi = driver.findElement(By.xpath("//canvas"));
+        WebElement canvas = driver.findElement(By.tagName("Canvas"));
         Actions actions = new Actions(driver);
-        actions.moveToElement(yaziTahtasi).clickAndHold();
-        for (int i = 0; i < 10; i++) {
-            actions.moveByOffset(-5,-5);
+
+        actions.moveToElement(canvas).moveByOffset(-50,52).clickAndHold();
+
+        for (int i = 0; i < 15; i++) {
+            actions.moveByOffset(4,-10);
         }
-        for (int i = 0; i < 10; i++) {
-            actions.moveByOffset(0,5);
+        for (int i = 0; i < 16; i++) {
+            actions.moveByOffset(4,10);
         }
-        for (int i = 0; i < 10; i++) {
-            actions.moveByOffset(5,0);
+        for (int i = 0; i < 26; i++) {
+            actions.moveByOffset(-6,-4);
         }
-        actions.release().build().perform();
-        Thread.sleep(5000);
-        driver.findElement(By.xpath("//*[text()='Clear']")).click();
+        for (int i = 0; i < 46; i++) {
+            actions.moveByOffset(4,0);
+        }
+        for (int i = 0; i < 26; i++) {
+            actions.moveByOffset(-6,4);
+        }
+
+        actions.build().perform();
+
+        waitFor(5);
+
+
+
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 }
