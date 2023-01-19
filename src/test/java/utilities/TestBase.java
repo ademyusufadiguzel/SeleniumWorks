@@ -1,19 +1,26 @@
 package utilities;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
+import org.apache.commons.io.FileUtils;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.junit.After;
 import org.junit.Before;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public abstract class TestBase {
@@ -70,5 +77,21 @@ public abstract class TestBase {
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    //FULL SCREEN SCREENSHOT
+    public void screenShotOfElement() throws IOException {
+        String currentDate = new SimpleDateFormat("yyyyMMddhhmmss").format(new Date());
+        String path = "target/ScreenShots"+currentDate+"image.png";
+        TakesScreenshot screenshot = (TakesScreenshot)driver;
+        FileUtils.copyFile(screenshot.getScreenshotAs(OutputType.FILE), new File(path));
+    }
+
+    //ELEMENT SCREENSHOT
+    public void screenShotOfElement(WebElement element) throws IOException {
+        String currentDate = new SimpleDateFormat("yyyyMMddhhmmss").format(new Date());
+        String path = "target/ScreenShots"+currentDate+"image.png";
+        File image = element.getScreenshotAs(OutputType.FILE);
+        FileUtils.copyFile(image, new File(path));
     }
 }
