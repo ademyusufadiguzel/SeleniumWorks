@@ -1,5 +1,8 @@
 package utilities;
 
+import com.aventstack.extentreports.ExtentReports;
+import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.apache.commons.io.FileUtils;
 import org.apache.poi.ss.usermodel.Row;
@@ -31,6 +34,15 @@ public abstract class TestBase {
 //    Sebepi child classlarda gorulebilir olmasi
     protected static WebDriver driver;
 
+/*
+    1 - Eger extendReport olmak istersek ilk yapmamiz gereken ExtentReport class'indan bir obje olusturmak
+    2 - ExtenHtmlReporter class'indan obje olusuturmak
+    3 - HTML formatinda duzenleyecegi icn ExtentHtmlReporter class'indan obje olusturmak
+*/
+    protected ExtentReports extentReports;//Raporlamayi baslatiriz
+    protected ExtentHtmlReporter extentHtmlReporter;//Raporumu HTML formatinda duzenler
+    protected String dateFormat = new SimpleDateFormat("yyyyMMddhhmmss").format(new Date());
+    protected ExtentTest extentTest ;
     //    setUp
     @Before
     public void setup() {
@@ -38,12 +50,24 @@ public abstract class TestBase {
         driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        extentReports = new ExtentReports();
+        String path = "target/extentReports/htmlReport"+dateFormat+".html";
+        extentHtmlReporter = new ExtentHtmlReporter(path);
+        extentReports.attachReporter(extentHtmlReporter);
+    //Raproda gozukmesini istedigimiz bilgiler icin
+        extentReports.setSystemInfo("Browser", "Chrome");
+        extentReports.setSystemInfo("Tester", "Adem");
+        extentHtmlReporter.config().setDocumentTitle("ExtentReport");
+        extentHtmlReporter.config().setReportName("Test Sonucu");
+        extentTest = extentReports.createTest("Extent Test", "Test Raporu");
     }
 
     //    tearDown
     @After
     public void tearDown() {
         driver.quit();
+        extentReports.flush();
     }
 
     //    MULTIPLE WINDOW:

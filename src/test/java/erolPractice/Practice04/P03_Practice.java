@@ -20,7 +20,7 @@ public class P03_Practice extends TestBase {
         driver.findElement(By.id("twotabsearchtextbox")).sendKeys("iphone", Keys.ENTER);
         List<WebElement> products = driver.findElements(By.partialLinkText("Apple iPhone"));
         for (int i = 0; i < products.size(); i++) {
-            products =  driver.findElements(By.partialLinkText("Apple iPhone"));
+            products =  driver.findElements(By.partialLinkText("Apple  iPhone"));
             products.get(i).click();
             driver.navigate().back();
         }
